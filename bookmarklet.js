@@ -1,0 +1,1 @@
+javascript:(function(){var%20a;a=document.createElement("script"),a.setAttribute("src","//shokai.github.io/GyazzAClone/dist/index.js?time="+Date.now()),document.querySelector("body").appendChild(a)}).call(this);

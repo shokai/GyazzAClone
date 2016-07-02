@@ -47,6 +47,7 @@ function convertLinesToSlide () {
   decorateBlocks(blocks)
   console.log(blocks)
   state.pages = blocks
+  display(state.page)
 }
 
 function getLines () {
@@ -70,10 +71,13 @@ function getBlocks (lines) {
       blocks.push([])
       line.blockHead = true
     }
-    if (line.text.length < 1) continue
+    if (/^\s*$/.test(line.text)) {
+      $(line.dom).hide()
+      continue
+    }
     last(blocks).push(line)
   }
-  return blocks
+  return blocks.filter(block => block.length > 0)
 }
 
 function decorateBlocks (blocks) {

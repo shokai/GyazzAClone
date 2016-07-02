@@ -85,24 +85,7 @@ function getBlocks (lines) {
 
 function decorateBlocks (blocks) {
   for (let block of blocks) {
-    for (let line of block) {
-      let size
-      switch (line.indent) {
-        case 0:
-          size = 2.5
-          break
-        case 1:
-          size = 2.2
-          break
-        default:
-          size = 2
-          break
-      }
-      $(line.dom).css({
-        'font-size': `${size}em`,
-        'line-height': '1.2em'
-      })
-    }
+    $(block[0].dom).addClass('ac-page-title')
   }
   return blocks
 }

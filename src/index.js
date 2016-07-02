@@ -35,7 +35,7 @@ function registerEvents () {
         break
       }
       case Keys.RIGHT: {
-        if (state.page < state.pages.length - 2) state.page += 1
+        if (state.page < state.pages.length - 1) state.page += 1
         display(state.page)
         break
       }

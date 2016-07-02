@@ -1,3 +1,5 @@
+require('insert-css')(require('./index.styl'))
+
 import $ from 'jquery'
 import {last} from 'lodash'
 import {Keys} from './keys'
@@ -11,16 +13,6 @@ var state = {
 
 convertLinesToSlide()
 registerEvents()
-maximizeEditor()
-
-function maximizeEditor () {
-  const hides = ['.navbar', '.col-sm-3', '.related-page-list']
-  for (let selector of hides) {
-    $(selector).hide()
-  }
-  $('.page-wrapper').css('width', '100% important!')
-  $('.col-sm-9').css('width', '100% important!')
-}
 
 function display (pageNumber) {
   for (let i = 0; i < state.pages.length; i++){

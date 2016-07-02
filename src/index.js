@@ -1,19 +1,60 @@
 import $ from 'jquery'
 import {last} from 'lodash'
+import {Keys} from './keys'
 
 console.log('Gyazz(A)Clone start')
 
 var state = {
-  page: 0
+  page: 0,
+  pages: []
 }
 
 convertLinesToSlide()
+registerEvents()
+maximizeEditor()
+
+function maximizeEditor () {
+  const hides = ['.navbar', '.col-sm-3', '.related-page-list']
+  for (let selector of hides) {
+    $(selector).hide()
+  }
+  $('.page-wrapper').css('width', '100% important!')
+  $('.col-sm-9').css('width', '100% important!')
+}
+
+function display (pageNumber) {
+  for (let i = 0; i < state.pages.length; i++){
+    let page = state.pages[i]
+    for (let line of page) {
+      if (pageNumber === i) $(line.dom).show()
+      else $(line.dom).hide()
+    }
+  }
+}
+
+function registerEvents () {
+  window.addEventListener('keydown', (e) => {
+    switch (e.keyCode) {
+      case Keys.LEFT: {
+        if (state.page > 0) state.page -= 1
+        display(state.page)
+        break
+      }
+      case Keys.RIGHT: {
+        if (state.page < state.pages.length - 2) state.page += 1
+        display(state.page)
+        break
+      }
+    }
+  })
+}
 
 function convertLinesToSlide () {
   const lines = getLines()
   const blocks = getBlocks(lines)
   decorateBlocks(blocks)
   console.log(blocks)
+  state.pages = blocks
 }
 
 function getLines () {

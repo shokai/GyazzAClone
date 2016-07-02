@@ -6,7 +6,7 @@ import {Keys} from './keys'
 
 window.$ = $
 
-console.log('Gyazz(A)Clone start')
+console.log('Gyazz(A)Clone start') // eslint-disable-line
 
 var state = {
   page: 0,
@@ -47,14 +47,13 @@ function convertLinesToSlide () {
   const lines = getLines()
   const blocks = getBlocks(lines)
   decorateBlocks(blocks)
-  console.log(blocks)
   state.pages = blocks
   display(state.page)
 }
 
 function getLines () {
   const lines = $('.lines .line')
-  console.log(`${lines.length} liens found`)
+  console.log(`${lines.length} liens found`) // eslint-disable-line
   const result = []
   for (let index = 0; index < lines.length; index++) {
     let line = lines[index]

@@ -4,6 +4,8 @@ import $ from 'jquery'
 import {last} from 'lodash'
 import {Keys} from './keys'
 
+window.$ = $
+
 console.log('Gyazz(A)Clone start')
 
 var state = {

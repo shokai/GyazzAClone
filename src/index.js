@@ -9,18 +9,24 @@ window.$ = $
 console.log('Gyazz(A)Clone start') // eslint-disable-line
 
 var state = {
-  page: 0,
+  page: Number.parseInt(localStorage.GyazzAClonePage) || 0,
   pages: []
 }
+
+setInterval(() => {
+  localStorage.GyazzAClonePage = state.page
+}, 1000)
 
 convertLinesToSlide()
 registerEvents()
 
-function display (pageNumber) {
+function display () {
+  if (state.page < 0) state.page = 0
+  else if (state.page > state.pages.length - 1) state.page = state.pages.length - 1
   for (let i = 0; i < state.pages.length; i++){
     let page = state.pages[i]
     for (let line of page) {
-      if (pageNumber === i) $(line.dom).show()
+      if (state.page === i) $(line.dom).show()
       else $(line.dom).hide()
     }
   }
@@ -31,12 +37,12 @@ function registerEvents () {
     switch (e.keyCode) {
       case Keys.LEFT: {
         if (state.page > 0) state.page -= 1
-        display(state.page)
+        display()
         break
       }
       case Keys.RIGHT: {
         if (state.page < state.pages.length - 1) state.page += 1
-        display(state.page)
+        display()
         break
       }
     }

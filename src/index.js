@@ -3,11 +3,16 @@ import {last} from 'lodash'
 
 console.log('Gyazz(A)Clone start')
 
+var state = {
+  page: 0
+}
+
 convertLinesToSlide()
 
 function convertLinesToSlide () {
   const lines = getLines()
   const blocks = getBlocks(lines)
+  decorateBlocks(blocks)
   console.log(blocks)
 }
 
@@ -34,6 +39,13 @@ function getBlocks (lines) {
     }
     if (line.text.length < 1) continue
     last(blocks).push(line)
+  }
+  return blocks
+}
+
+function decorateBlocks (blocks) {
+  for (let block of blocks) {
+    $(block[0].dom).css('font-size', '1.3em')
   }
   return blocks
 }

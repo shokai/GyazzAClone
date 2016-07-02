@@ -13,16 +13,13 @@ var state = {
   pages: []
 }
 
-setInterval(() => {
-  localStorage.GyazzAClonePage = state.page
-}, 1000)
-
 convertLinesToSlide()
 registerEvents()
 
 function display () {
   if (state.page < 0) state.page = 0
   else if (state.page > state.pages.length - 1) state.page = state.pages.length - 1
+  localStorage.GyazzAClonePage = String(state.page)
   for (let i = 0; i < state.pages.length; i++){
     let page = state.pages[i]
     for (let line of page) {

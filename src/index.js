@@ -64,16 +64,17 @@ function getLines () {
   return result
 }
 
+function isEmptyLine (line) {
+  return /^\s*$/.test(line.text) && $(line.dom).find('img').length < 1
+}
+
 function getBlocks (lines) {
-  const blocks = [ [] ]
-  for (let line of lines) {
-    if (line.indent < 1 && line.text.length > 0 && last(blocks).length > 0){
+  const blocks = [ [ lines[0] ] ]
+  for (let i = 1; i < lines.length; i++) {
+    let line = lines[i]
+    if (line.indent === 0 && !isEmptyLine(line) && isEmptyLine(lines[i-1])) {
       blocks.push([])
-      line.blockHead = true
-    }
-    if (/^\s*$/.test(line.text)) {
-      $(line.dom).hide()
-      continue
+      $(line.dom).addClass('blockHead')
     }
     last(blocks).push(line)
   }
@@ -82,7 +83,24 @@ function getBlocks (lines) {
 
 function decorateBlocks (blocks) {
   for (let block of blocks) {
-    $(block[0].dom).css('font-size', '1.3em')
+    for (let line of block) {
+      let size
+      switch (line.indent) {
+        case 0:
+          size = 2.5
+          break
+        case 1:
+          size = 2.2
+          break
+        default:
+          size = 2
+          break
+      }
+      $(line.dom).css({
+        'font-size': `${size}em`,
+        'line-height': '1.2em'
+      })
+    }
   }
   return blocks
 }

@@ -55,14 +55,14 @@ function convertLinesToSlide () {
 }
 
 function getLines () {
-  const lines = $('.lines .line')
+  const lines = $('.lines > .line > .text')
   console.log(`${lines.length} liens found`) // eslint-disable-line
   const result = []
   for (let index = 0; index < lines.length; index++) {
     let line = lines[index]
     let $_ = $(line)
     let text = $_.text()
-    let indent = text.match(/^(\\t)*/)[0].length/2
+    let indent = text.match(/^(\s)*/)[0].length
     result.push({ dom: line, text, indent, index })
   }
   return result

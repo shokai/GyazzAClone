@@ -15,6 +15,7 @@ var state = {
 
 convertLinesToSlide()
 registerEvents()
+setInterval(convertLinesToSlide, 500)
 
 function display () {
   if (state.page < 0) state.page = 0

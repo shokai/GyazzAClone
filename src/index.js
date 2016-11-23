@@ -7,6 +7,7 @@ import {Keys} from './keys'
 window.$ = $
 
 console.log('Gyazz(A)Clone start') // eslint-disable-line
+$('body').addClass('presentation')
 
 var state = {
   page: Number.parseInt(localStorage.GyazzAClonePage) || 0,

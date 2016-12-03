@@ -63,7 +63,7 @@ function convertLinesToSlide () {
 }
 
 function getLines () {
-  const lines = $('.lines > .line > .text')
+  const lines = $('.lines > .line > .text, .table-block')
   console.log(`${lines.length} liens found`) // eslint-disable-line
   const result = []
   for (let index = 0; index < lines.length; index++) {

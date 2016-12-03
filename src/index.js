@@ -1,4 +1,4 @@
-require('insert-css')(require('./index.styl'))
+const acCss = require('insert-css')(require('./index.styl'))
 
 import $ from 'jquery'
 import {last} from 'lodash'
@@ -16,7 +16,7 @@ var state = {
 
 convertLinesToSlide()
 registerEvents()
-setInterval(convertLinesToSlide, 500)
+const convertLinesInterval = setInterval(convertLinesToSlide, 500)
 
 function display () {
   if (state.page < 0) state.page = 0
@@ -31,21 +31,27 @@ function display () {
   }
 }
 
-function registerEvents () {
-  window.addEventListener('keydown', (e) => {
-    switch (e.keyCode) {
-      case Keys.LEFT: {
-        if (state.page > 0) state.page -= 1
-        display()
-        break
-      }
-      case Keys.RIGHT: {
-        if (state.page < state.pages.length - 1) state.page += 1
-        display()
-        break
-      }
+function onKeydown (e) {
+  switch (e.keyCode) {
+    case Keys.LEFT: {
+      if (state.page > 0) state.page -= 1
+      display()
+      break
     }
-  })
+    case Keys.RIGHT: {
+      if (state.page < state.pages.length - 1) state.page += 1
+      display()
+      break
+    }
+    case Keys.ESC: {
+      exitPresentation()
+      break
+    }
+  }
+}
+
+function registerEvents () {
+  window.addEventListener('keydown', onKeydown, false)
 }
 
 function convertLinesToSlide () {
@@ -92,4 +98,23 @@ function decorateBlocks (blocks) {
     $(block[0].dom).addClass('ac-page-title')
   }
   return blocks
+}
+
+function exitPresentation () {
+  console.log('Exit Presentation Mode.')
+
+  // Remove classes, events and intervals
+  // ignored: .blockHead, .ac-page-title
+  acCss.remove()
+  clearInterval(convertLinesInterval)
+  window.removeEventListener('keydown', onKeydown, false)
+  $('body').removeClass('presentation')
+
+  // display all lines
+  for (let i = 0; i < state.pages.length; i++){
+    let page = state.pages[i]
+    for (let line of page) {
+      $(line.dom).show()
+    }
+  }
 }

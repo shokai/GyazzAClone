@@ -25,8 +25,8 @@ function display () {
   for (let i = 0; i < state.pages.length; i++){
     let page = state.pages[i]
     for (let line of page) {
-      if (state.page === i) $(line.dom).show()
-      else $(line.dom).hide()
+      if (state.page === i) $(line).show()
+      else $(line).hide()
     }
   }
 }
@@ -57,47 +57,30 @@ function registerEvents () {
 function convertLinesToSlide () {
   const lines = getLines()
   const blocks = getBlocks(lines)
-  decorateBlocks(blocks)
   state.pages = blocks
   display(state.page)
 }
 
 function getLines () {
-  const lines = $('.lines > .line > .text, .table-block')
+  const lines = $('.lines > .line, .table-block')
   console.log(`${lines.length} liens found`) // eslint-disable-line
   const result = []
-  for (let index = 0; index < lines.length; index++) {
-    let line = lines[index]
-    let $_ = $(line)
-    let text = $_.text()
-    let indent = text.match(/^(\s)*/)[0].length
-    result.push({ dom: line, text, indent, index })
+  for (let i = 0; i < lines.length; i++) {
+    result.push(lines[i])
   }
   return result
-}
-
-function isEmptyLine (line) {
-  return /^\s*$/.test(line.text) && $(line.dom).find('img').length < 1
 }
 
 function getBlocks (lines) {
   const blocks = [ [ lines[0] ] ]
   for (let i = 1; i < lines.length; i++) {
     let line = lines[i]
-    if (line.indent === 0 && !isEmptyLine(line) && isEmptyLine(lines[i-1])) {
+    if (line.attributes.class.value.split(/\s/).includes('section-title')) {
       blocks.push([])
-      $(line.dom).addClass('blockHead')
     }
     last(blocks).push(line)
   }
   return blocks.filter(block => block.length > 0)
-}
-
-function decorateBlocks (blocks) {
-  for (let block of blocks) {
-    $(block[0].dom).addClass('ac-page-title')
-  }
-  return blocks
 }
 
 function exitPresentation () {
@@ -114,7 +97,7 @@ function exitPresentation () {
   for (let i = 0; i < state.pages.length; i++){
     let page = state.pages[i]
     for (let line of page) {
-      $(line.dom).show()
+      $(line).show()
     }
   }
 }

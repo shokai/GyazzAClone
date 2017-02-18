@@ -4,8 +4,8 @@
   "version": "0.0.1",
   "description": "convert gyazz-clone to slide",
   "engines": {
-    "node": "6.x",
-    "npm": "3.x"
+    "node": "7.x",
+    "npm": "4.x"
   },
   "main": "index.js",
   "scripts": {

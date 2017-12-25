@@ -1,7 +1,7 @@
 # GyazzA(C)lone
 
 - https://github.com/shokai/GyazzAClone
-- run [bookmarklet.js](https://shokai.github.io/GyazzAClone/bookmarklet.js)
+- run [bookmarklet.js](https://shokai.github.io/GyazzAClone/bookmarklet/bookmarklet.js)
 
 [![CircleCI](https://circleci.com/gh/shokai/GyazzAClone.svg?style=svg)](https://circleci.com/gh/shokai/GyazzAClone)
 
@@ -11,7 +11,7 @@
     % npm i
     % npm run watch
 
-run [bookmarklet-dev.js](https://shokai.github.io/GyazzAClone/bookmarklet-dev.js)
+run [bookmarklet-dev.js](https://shokai.github.io/GyazzAClone/bookmarklet/bookmarklet-dev.js)
 
 ## Deploy
 

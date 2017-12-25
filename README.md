@@ -9,7 +9,7 @@
 ## Develop
 
     % npm i
-    % npm start
+    % npm run watch
 
 run [bookmarklet-dev.js](https://shokai.github.io/GyazzAClone/bookmarklet-dev.js)
 

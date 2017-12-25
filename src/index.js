@@ -1,8 +1,8 @@
-const acCss = require('insert-css')(require('./index.styl'))
-
+/* eslint-env browser */
 import $ from 'jquery'
 import {last} from 'lodash'
 import {Keys} from './keys'
+const acCss = require('insert-css')(require('./index.styl'))
 
 window.$ = $
 
@@ -22,7 +22,7 @@ function display () {
   if (state.page < 0) state.page = 0
   else if (state.page > state.pages.length - 1) state.page = state.pages.length - 1
   localStorage.GyazzAClonePage = String(state.page)
-  for (let i = 0; i < state.pages.length; i++){
+  for (let i = 0; i < state.pages.length; i++) {
     let page = state.pages[i]
     for (let line of page) {
       if (state.page === i) $(line).show()
@@ -94,7 +94,7 @@ function exitPresentation () {
   $('body').removeClass('presentation')
 
   // display all lines
-  for (let i = 0; i < state.pages.length; i++){
+  for (let i = 0; i < state.pages.length; i++) {
     let page = state.pages[i]
     for (let line of page) {
       $(line).show()
